@@ -6,6 +6,13 @@ namespace FlappyBird.scenes;
 
 public partial class Game : Node2D
 {
+    #region Child
+
+    [ExportGroup("ChildDontChange")] [Export]
+    private Bird _bird;
+
+    #endregion
+
     public override void _Ready()
     {
         _bird.GameOver += OnGameOver;
@@ -22,11 +29,4 @@ public partial class Game : Node2D
     {
         AutoloadManager.SceneTranslation.Call(SceneTranslation.MethodName.ChangeSceneToFile, ScenePaths.TitlePage);
     }
-
-    #region Child
-
-    [ExportGroup("ChildDontChange")] [Export]
-    private Bird _bird;
-
-    #endregion
 }

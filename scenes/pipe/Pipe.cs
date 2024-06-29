@@ -5,12 +5,16 @@ namespace FlappyBird.scenes;
 
 public partial class Pipe : StaticBody2D
 {
-    [Export] private int _textureRow = 2;
-    [Export] private int _textureCol = 4;
-    [Export] private Vector2 _textureTileSize = new(32, 80);
-
     private Vector2 _collisionShapeSize;
     private Vector2 _size;
+    [Export] private int _textureCol = 4;
+    [Export] private int _textureRow = 2;
+    [Export] private Vector2 _textureTileSize = new(32, 80);
+
+    private Pipe()
+    {
+        Size = new Vector2(32, 80);
+    }
 
     [Export]
     public Vector2 Size
@@ -21,11 +25,6 @@ public partial class Pipe : StaticBody2D
             _size = value;
             _collisionShapeSize = new Vector2(value.X - 4, value.Y);
         }
-    } 
-
-    private Pipe()
-    {
-        Size = new Vector2(32, 80);
     }
 
 
@@ -37,7 +36,7 @@ public partial class Pipe : StaticBody2D
         _ninePatchRect.RegionRect = _ninePatchRect.RegionRect with
         {
             Size = _textureTileSize,
-            Position = new Vector2(col * _textureTileSize.X, row * _textureTileSize.Y),
+            Position = new Vector2(col * _textureTileSize.X, row * _textureTileSize.Y)
         };
 
         _ninePatchRect.Size = Size;
