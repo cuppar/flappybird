@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://d3t73m73n0dq7"]
+
+[ext_resource type="Script" path="res://scenes/pipe/Pipe.cs" id="1_2v2tw"]
+[ext_resource type="Texture2D" uid="uid://cgx7xsflv6diw" path="res://assets/Tiles/Style 1/PipeStyle1.png" id="1_6twa8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7fmx4"]
+size = Vector2(28, 80)
+
+[node name="Pipe" type="StaticBody2D" node_paths=PackedStringArray("_collisionShape", "_ninePatchRect")]
+script = ExtResource("1_2v2tw")
+_collisionShape = NodePath("CollisionShape2D")
+_ninePatchRect = NodePath("NinePatchRect")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -16.0
+offset_top = -40.0
+offset_right = 16.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_6twa8")
+region_rect = Rect2(0, 0, 32, 80)
+patch_margin_top = 19
+patch_margin_bottom = 19
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_7fmx4")

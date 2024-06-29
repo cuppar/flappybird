@@ -10,7 +10,7 @@ public partial class Bird : CharacterBody2D
     public delegate void GameOverEventHandler();
 
     [Signal]
-    public delegate void CollideWithEventHandler(KinematicCollision2D collider);
+    public delegate void CollideWithEventHandler(KinematicCollision2D collision);
 
     #endregion
 

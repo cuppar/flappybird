@@ -1,11 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://bftgigcg3su8y"]
+[gd_scene load_steps=4 format=3 uid="uid://bftgigcg3su8y"]
 
 [ext_resource type="Script" path="res://scenes/Game.cs" id="1_14i4t"]
 [ext_resource type="PackedScene" uid="uid://pcgmibvhay1y" path="res://scenes/bird/bird.tscn" id="2_s3q5a"]
+[ext_resource type="PackedScene" uid="uid://d3t73m73n0dq7" path="res://scenes/pipe/pipe.tscn" id="3_xl0d6"]
 
 [node name="Game" type="Node2D" node_paths=PackedStringArray("_bird")]
 script = ExtResource("1_14i4t")
 _bird = NodePath("Bird")
+
+[node name="Pipe" parent="." instance=ExtResource("3_xl0d6")]
+position = Vector2(124, 122)
+constant_linear_velocity = Vector2(-200, 0)
 
 [node name="Bird" parent="." instance=ExtResource("2_s3q5a")]
 position = Vector2(123, 32)

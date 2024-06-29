@@ -12,9 +12,10 @@ public partial class Game : Node2D
         _bird.CollideWith += OnBirdCollisionWith;
     }
 
-    private void OnBirdCollisionWith(KinematicCollision2D collider)
+    private void OnBirdCollisionWith(KinematicCollision2D collision)
     {
-       // todo 
+        if (collision.GetCollider() is Pipe)
+            _bird.Death();
     }
 
     private void OnGameOver()

@@ -1,6 +1,19 @@
-[gd_scene load_steps=2 format=3 uid="uid://dgqylh8gernnb"]
+[gd_scene load_steps=6 format=3 uid="uid://dgqylh8gernnb"]
 
 [ext_resource type="Script" path="res://scenes/title_page/TitlePage.cs" id="1_jfbp3"]
+
+[sub_resource type="InputEventAction" id="InputEventAction_t38cs"]
+action = &"ui_accept"
+
+[sub_resource type="Shortcut" id="Shortcut_vk7qh"]
+events = [SubResource("InputEventAction_t38cs")]
+
+[sub_resource type="InputEventKey" id="InputEventKey_u6q4d"]
+device = -1
+keycode = 4194305
+
+[sub_resource type="Shortcut" id="Shortcut_1pmos"]
+events = [SubResource("InputEventKey_u6q4d")]
 
 [node name="TitlePage" type="Control"]
 layout_mode = 3
@@ -45,12 +58,14 @@ theme_override_constants/separation = 8
 custom_minimum_size = Vector2(100, 30)
 layout_mode = 2
 theme_override_font_sizes/font_size = 16
+shortcut = SubResource("Shortcut_vk7qh")
 text = "Start"
 
 [node name="QuitButton" type="Button" parent="VBoxContainer"]
 custom_minimum_size = Vector2(100, 30)
 layout_mode = 2
 theme_override_font_sizes/font_size = 16
+shortcut = SubResource("Shortcut_1pmos")
 text = "Quit"
 
 [connection signal="pressed" from="VBoxContainer/StartButton" to="." method="OnStartButtonClicked"]
