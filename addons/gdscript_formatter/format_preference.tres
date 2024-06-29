@@ -1,0 +1,46 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://bbplm33w0ypbb"]
+
+[sub_resource type="GDScript" id="GDScript_xxxdv"]
+script/source = "@tool
+extends Resource
+
+## How many characters per line to allow.
+@export var line_length := 175:
+	set(v):
+		line_length = v
+		emit_changed()
+
+## If true, will skip safety checks.
+@export var fast_but_unsafe := false:
+	set(v):
+		fast_but_unsafe = v
+		emit_changed()
+
+## If true, will format on save.
+@export var format_on_save := false:
+	set(v):
+		format_on_save = v
+		emit_changed()
+
+## The gdformat command to use in command line.
+## Default is \"gdformat\".
+@export var gdformat_command := \"gdformat\":
+	set(v):
+		gdformat_command = v
+		emit_changed()
+
+## The pip command to use in command line.
+## Default is \"pip\".
+@export var pip_command := \"pip\":
+	set(v):
+		pip_command = v
+		emit_changed()
+"
+
+[resource]
+script = SubResource("GDScript_xxxdv")
+line_length = 175
+fast_but_unsafe = false
+format_on_save = true
+gdformat_command = "gdformat.exe"
+pip_command = "pip"

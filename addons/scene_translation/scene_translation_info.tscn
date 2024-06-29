@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cq03ha5u64neu"]
+
+[ext_resource type="Script" path="res://addons/scene_translation/scene_translation_info.gd" id="1_50586"]
+
+[node name="SceneTranslationInfo" type="Node2D"]
+script = ExtResource("1_50586")

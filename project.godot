@@ -1,0 +1,27 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="FlappyBird"
+config/features=PackedStringArray("4.3", "C#", "Forward Plus")
+config/icon="res://icon.svg"
+
+[autoload]
+
+SceneTranslation="*res://addons/scene_translation/scene_translation.tscn"
+
+[dotnet]
+
+project/assembly_name="FlappyBird"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/Todo_Manager/plugin.cfg", "res://addons/gdscript_formatter/plugin.cfg", "res://addons/scene_translation/plugin.cfg", "res://addons/toggle_external_editor/plugin.cfg")

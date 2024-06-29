@@ -1,0 +1,30 @@
+[gd_scene load_steps=2 format=3 uid="uid://kna221gt5h51"]
+
+[ext_resource type="Script" path="res://addons/toggle_external_editor/toggle_external_editor_dock.gd" id="1_4uafu"]
+
+[node name="EnableExternalEditor" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_bottom = 40.0
+script = ExtResource("1_4uafu")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+offset_right = 140.0
+offset_bottom = 40.0
+size_flags_vertical = 0
+
+[node name="CheckBox" type="CheckBox" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 10
+
+[node name="LinkButton" type="LinkButton" parent="HBoxContainer/MarginContainer"]
+layout_mode = 2
+text = "启用外部编辑器"
+underline = 2
+
+[connection signal="toggled" from="HBoxContainer/CheckBox" to="." method="_on_check_box_toggled"]
+[connection signal="pressed" from="HBoxContainer/MarginContainer/LinkButton" to="." method="_on_link_button_pressed"]
