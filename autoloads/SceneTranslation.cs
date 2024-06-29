@@ -1,6 +1,6 @@
 ﻿using Godot;
 
-namespace Breakout.autoloads;
+namespace FlappyBird.autoloads;
 
 public static class SceneTranslation
 {

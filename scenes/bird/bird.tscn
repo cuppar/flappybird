@@ -1,0 +1,77 @@
+[gd_scene load_steps=12 format=3 uid="uid://pcgmibvhay1y"]
+
+[ext_resource type="Script" path="res://scenes/bird/Bird.cs" id="1_m7s0x"]
+[ext_resource type="Texture2D" uid="uid://bpqmdduj10ckf" path="res://assets/Player/StyleBird1/Bird1-2.png" id="2_4d2ec"]
+[ext_resource type="Texture2D" uid="uid://or1i6x5ay176" path="res://assets/Player/StyleBird1/bird_dead.png" id="2_bdxyx"]
+[ext_resource type="AudioStream" uid="uid://cfk6rn0l8rxi7" path="res://scenes/bird/dead_sound.wav" id="4_st4mr"]
+[ext_resource type="AudioStream" uid="uid://dcxanycy7fauo" path="res://scenes/bird/fly_sound.wav" id="5_l51ng"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rqd7w"]
+atlas = ExtResource("2_4d2ec")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7ctk0"]
+atlas = ExtResource("2_4d2ec")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l51ss"]
+atlas = ExtResource("2_4d2ec")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_henon"]
+atlas = ExtResource("2_4d2ec")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_48vng"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_bdxyx")
+}],
+"loop": true,
+"name": &"dead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rqd7w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7ctk0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l51ss")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_henon")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_13ww1"]
+radius = 5.0
+
+[node name="Bird" type="CharacterBody2D" node_paths=PackedStringArray("_collisionShape", "_animatedSprite", "_flySound", "_deadSound")]
+script = ExtResource("1_m7s0x")
+FlySpeed = -70.0
+Gravity = 2.0
+_collisionShape = NodePath("CollisionShape2D")
+_animatedSprite = NodePath("Sprite2D")
+_flySound = NodePath("FlySound")
+_deadSound = NodePath("DeadSound")
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_48vng")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_13ww1")
+
+[node name="DeadSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_st4mr")
+
+[node name="FlySound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_l51ng")

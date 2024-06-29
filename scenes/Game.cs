@@ -1,6 +1,31 @@
+using FlappyBird.autoloads;
+using FlappyBird.constants;
 using Godot;
-using System;
+
+namespace FlappyBird.scenes;
 
 public partial class Game : Node2D
 {
+    public override void _Ready()
+    {
+        _bird.GameOver += OnGameOver;
+        _bird.CollideWith += OnBirdCollisionWith;
+    }
+
+    private void OnBirdCollisionWith(KinematicCollision2D collider)
+    {
+       // todo 
+    }
+
+    private void OnGameOver()
+    {
+        AutoloadManager.SceneTranslation.Call(SceneTranslation.MethodName.ChangeSceneToFile, ScenePaths.TitlePage);
+    }
+
+    #region Child
+
+    [ExportGroup("ChildDontChange")] [Export]
+    private Bird _bird;
+
+    #endregion
 }
