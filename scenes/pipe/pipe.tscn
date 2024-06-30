@@ -3,24 +3,7 @@
 [ext_resource type="Script" path="res://scenes/pipe/Pipe.cs" id="1_2v2tw"]
 [ext_resource type="Texture2D" uid="uid://cgx7xsflv6diw" path="res://assets/Tiles/Style 1/PipeStyle1.png" id="1_6twa8"]
 
-[node name="Pipe" type="StaticBody2D" node_paths=PackedStringArray("_ninePatchRect")]
+[node name="Pipe" type="StaticBody2D"]
 script = ExtResource("1_2v2tw")
 _texture = ExtResource("1_6twa8")
-_ninePatchRect = NodePath("NinePatchRect")
-
-[node name="NinePatchRect" type="NinePatchRect" parent="."]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -16.0
-offset_top = -40.0
-offset_right = 16.0
-offset_bottom = 40.0
-grow_horizontal = 2
-grow_vertical = 2
-region_rect = Rect2(0, 0, 32, 80)
-patch_margin_top = 19
-patch_margin_bottom = 19
-metadata/_edit_use_anchors_ = true
+Size = Vector2(32, 80)

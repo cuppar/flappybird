@@ -6,6 +6,6 @@
 [node name="PipePair" type="Node2D"]
 script = ExtResource("1_qukmu")
 PipeScene = ExtResource("2_xe4sw")
-MidSpaceHeight = 40.125
-MidSpaceY = 39.625
-Width = 33.91
+MidSpaceHeight = 31.665
+MidSpaceY = 58.855
+Width = 52.965

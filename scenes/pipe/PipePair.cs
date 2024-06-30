@@ -8,8 +8,8 @@ public partial class PipePair : Node2D
     private float _midSpaceHeight;
     private float _midSpaceY;
     private Vector2 _screenSize;
-    private float _width;
     private Pipe _tempPipe;
+    private float _width;
 
     [Export] public PackedScene PipeScene;
 

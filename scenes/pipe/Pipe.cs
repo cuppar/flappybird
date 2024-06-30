@@ -10,11 +10,13 @@ public partial class Pipe : StaticBody2D
     private int _currentTileIndex;
     private int _currentTileRow;
     private Vector2 _size;
+    [Export] private Texture2D _texture;
+    [Export] private Vector2 _textureTileSize = new(32, 80);
+    [Export] public int FixBottomHeight = 19;
+    [Export] public int FixTopHeight = 19;
 
     [Export] public int TextureTileColCount = 4;
     [Export] public int TextureTileRowCount = 2;
-    [Export] private Vector2 _textureTileSize = new(32, 80);
-    [Export] private Texture2D _texture;
 
     private Pipe()
     {
@@ -45,42 +47,54 @@ public partial class Pipe : StaticBody2D
         get => _size;
         set
         {
+            if (_size == value)
+                return;
+
             _size = value;
-            _collisionShapeSize = new Vector2(Math.Max(_size.X - 4, 1), _size.Y);
+            _collisionShapeSize = _size with
+            {
+                X = Math.Max(_size.X * 28 / 32, 0)
+            };
+            if (IsNodeReady())
+                Update();
         }
     }
 
 
     public override void _Ready()
     {
-        _ninePatchRect.Texture = _texture;
         Update();
     }
 
     private void Update()
     {
         foreach (var child in GetChildren())
-        {
             if (child.Owner == null)
-            {
                 child.QueueFree();
-            }
-        }
 
-        _ninePatchRect.RegionRect = _ninePatchRect.RegionRect with
+        var ninePatchRect = new NinePatchRect();
+        AddChild(ninePatchRect);
+        ninePatchRect.Texture = _texture;
+        ninePatchRect.RegionRect = ninePatchRect.RegionRect with
         {
             Size = _textureTileSize,
             Position = new Vector2(_currentTileCol * _textureTileSize.X, _currentTileRow * _textureTileSize.Y)
         };
 
-        if (Size.Y <= _ninePatchRect.PatchMarginTop + _ninePatchRect.PatchMarginBottom)
+        if (Size.Y < FixTopHeight + FixBottomHeight)
         {
-            _ninePatchRect.PatchMarginTop = 0;
-            _ninePatchRect.PatchMarginBottom = 0;
+            ninePatchRect.PatchMarginTop = 0;
+            ninePatchRect.PatchMarginBottom = 0;
+        }
+        else
+        {
+            ninePatchRect.PatchMarginTop = FixTopHeight;
+            ninePatchRect.PatchMarginBottom = FixBottomHeight;
         }
 
-        _ninePatchRect.Size = Size;
-        _ninePatchRect.Position = -Size / 2;
+        ninePatchRect.Size = Size;
+        ninePatchRect.Position = -Size / 2;
+
 
         var collisionShape = new CollisionShape2D();
         AddChild(collisionShape);
@@ -89,11 +103,4 @@ public partial class Pipe : StaticBody2D
         collisionShape.Shape = shape;
         collisionShape.Position = Vector2.Zero;
     }
-
-    #region Child
-
-    [ExportGroup("ChildDontChange")] [Export]
-    private NinePatchRect _ninePatchRect;
-
-    #endregion
 }
