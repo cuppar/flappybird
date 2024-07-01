@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://dgqylh8gernnb"]
+[gd_scene load_steps=7 format=3 uid="uid://dgqylh8gernnb"]
 
 [ext_resource type="Script" path="res://scenes/title_page/TitlePage.cs" id="1_jfbp3"]
+[ext_resource type="PackedScene" uid="uid://d16u0dginywq" path="res://scenes/background/background.tscn" id="2_qyapt"]
 
 [sub_resource type="InputEventAction" id="InputEventAction_t38cs"]
 action = &"ui_accept"
@@ -24,7 +25,10 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_jfbp3")
 
+[node name="ParallaxBackground" parent="." instance=ExtResource("2_qyapt")]
+
 [node name="Label" type="Label" parent="."]
+modulate = Color(0.835294, 0.396078, 0.760784, 1)
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
