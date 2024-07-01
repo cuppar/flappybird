@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://bftgigcg3su8y"]
+[gd_scene load_steps=7 format=3 uid="uid://bftgigcg3su8y"]
 
 [ext_resource type="Script" path="res://scenes/Game.cs" id="1_14i4t"]
+[ext_resource type="PackedScene" uid="uid://d16u0dginywq" path="res://scenes/background/background.tscn" id="2_m2bl8"]
 [ext_resource type="PackedScene" uid="uid://pcgmibvhay1y" path="res://scenes/bird/bird.tscn" id="2_s3q5a"]
 [ext_resource type="PackedScene" uid="uid://djs6vgltr32bt" path="res://scenes/pipe/pipe_generator.tscn" id="2_sicjl"]
 [ext_resource type="PackedScene" uid="uid://ct6r116p862bo" path="res://scenes/ui/ui.tscn" id="4_m5wv2"]
@@ -12,6 +13,8 @@ script = ExtResource("1_14i4t")
 _bird = NodePath("Bird")
 _scoreTimer = NodePath("ScoreTimer")
 _ui = NodePath("UI")
+
+[node name="ParallaxBackground" parent="." instance=ExtResource("2_m2bl8")]
 
 [node name="Ceil" type="StaticBody2D" parent="."]
 
