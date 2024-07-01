@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://pcgmibvhay1y"]
+[gd_scene load_steps=13 format=3 uid="uid://pcgmibvhay1y"]
 
 [ext_resource type="Script" path="res://scenes/bird/Bird.cs" id="1_m7s0x"]
 [ext_resource type="Texture2D" uid="uid://bpqmdduj10ckf" path="res://assets/Player/StyleBird1/Bird1-2.png" id="2_4d2ec"]
@@ -51,13 +51,17 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_up5to"]
+radius = 6.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_o1r70"]
 radius = 5.0
 
-[node name="Bird" type="CharacterBody2D" node_paths=PackedStringArray("_animatedSprite", "_flySound", "_deadSound", "_hitArea")]
+[node name="Bird" type="CharacterBody2D" node_paths=PackedStringArray("_animatedSprite", "_collisionShape", "_flySound", "_deadSound", "_hitArea")]
 script = ExtResource("1_m7s0x")
 FlySpeed = -70.0
 Gravity = 2.0
 _animatedSprite = NodePath("Sprite2D")
+_collisionShape = NodePath("CollisionShape2D")
 _flySound = NodePath("FlySound")
 _deadSound = NodePath("DeadSound")
 _hitArea = NodePath("HitArea")
@@ -77,3 +81,6 @@ stream = ExtResource("5_kou14")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea"]
 shape = SubResource("CircleShape2D_up5to")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_o1r70")

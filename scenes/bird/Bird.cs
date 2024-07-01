@@ -10,7 +10,10 @@ public partial class Bird : CharacterBody2D
     public delegate void CollideWithEventHandler(Node2D body);
 
     [Signal]
-    public delegate void GameOverEventHandler();
+    public delegate void DeadAnimationEndEventHandler();
+
+    [Signal]
+    public delegate void DeadEventHandler();
 
     #endregion
 
@@ -38,7 +41,7 @@ public partial class Bird : CharacterBody2D
         // 死亡后等待死亡动画结束后出发GameOver
         if (!Alive && Position.Y > _screenSize.Y)
         {
-            EmitSignal(SignalName.GameOver);
+            EmitSignal(SignalName.DeadAnimationEnd);
             return;
         }
 
@@ -68,13 +71,19 @@ public partial class Bird : CharacterBody2D
     {
         Alive = false;
         _hitArea.SetDeferred(Area2D.PropertyName.Monitoring, false);
+        _collisionShape.SetDeferred(CollisionShape2D.PropertyName.Disabled, true);
         _animatedSprite.Play("dead");
         _deadSound.Play();
 
         Rotation = 0;
-        Velocity = Velocity with { Y = DeadSpeed };
+        SetDeferred(CharacterBody2D.PropertyName.Velocity, Velocity with
+        {
+            Y = DeadSpeed
+        });
         if (Position.Y > _screenSize.Y)
             Position = Position with { Y = _screenSize.Y - 1 };
+
+        EmitSignal(SignalName.Dead);
     }
 
     public override void _UnhandledInput(InputEvent @event)
@@ -90,6 +99,7 @@ public partial class Bird : CharacterBody2D
     [ExportGroup("ChildDontChange")] [Export]
     private AnimatedSprite2D _animatedSprite;
 
+    [Export] private CollisionShape2D _collisionShape;
     [Export] private AudioStreamPlayer2D _flySound;
     [Export] private AudioStreamPlayer2D _deadSound;
     [Export] private Area2D _hitArea;

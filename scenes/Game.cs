@@ -6,16 +6,6 @@ namespace FlappyBird.scenes;
 
 public partial class Game : Node2D
 {
-    #region Child
-
-    [ExportGroup("ChildDontChange")] [Export]
-    private Bird _bird;
-
-    [Export] private Timer _scoreTimer;
-    [Export] private UI _ui;
-
-    #endregion
-
     private int _score;
 
     private int Score
@@ -31,11 +21,17 @@ public partial class Game : Node2D
 
     public override void _Ready()
     {
-        _bird.GameOver += OnGameOver;
+        _bird.DeadAnimationEnd += OnBirdDeadAnimationEnd;
         _bird.CollideWith += OnBirdCollisionWith;
+        _bird.Dead += OnBirdDead;
         _scoreTimer.Timeout += OnScoreTimerTimeout;
 
         Score = 0;
+    }
+
+    private void OnBirdDead()
+    {
+        _scoreTimer.Stop();
     }
 
     private void OnScoreTimerTimeout()
@@ -49,8 +45,18 @@ public partial class Game : Node2D
             _bird.Death();
     }
 
-    private void OnGameOver()
+    private void OnBirdDeadAnimationEnd()
     {
         AutoloadManager.SceneTranslation.Call(SceneTranslation.MethodName.ChangeSceneToFile, ScenePaths.TitlePage);
     }
+
+    #region Child
+
+    [ExportGroup("ChildDontChange")] [Export]
+    private Bird _bird;
+
+    [Export] private Timer _scoreTimer;
+    [Export] private UI _ui;
+
+    #endregion
 }
