@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://cxwv0ka1pkk84"]
+
+[ext_resource type="Script" path="res://scenes/pipe/PipePairWithScreenMonitor.cs" id="1_qlmig"]
+[ext_resource type="PackedScene" uid="uid://csmedjbioifwn" path="res://scenes/pipe/pipe_pair.tscn" id="2_owdxx"]
+
+[node name="PipePairWithScreenMonitor" type="Node2D"]
+script = ExtResource("1_qlmig")
+MidSpaceHeight = 60.0
+MidSpaceY = 30.0
+PipePairScene = ExtResource("2_owdxx")
+Width = 32.0

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://djs6vgltr32bt"]
+
+[ext_resource type="Script" path="res://scenes/pipe/PipeGenerator.cs" id="1_g1vcu"]
+
+[node name="PipeGenerator" type="Node2D"]
+script = ExtResource("1_g1vcu")

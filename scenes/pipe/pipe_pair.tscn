@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://be1d0ccrxv3vc"]
+[gd_scene load_steps=3 format=3 uid="uid://csmedjbioifwn"]
 
 [ext_resource type="Script" path="res://scenes/pipe/PipePair.cs" id="1_qukmu"]
 [ext_resource type="PackedScene" uid="uid://d3t73m73n0dq7" path="res://scenes/pipe/pipe.tscn" id="2_xe4sw"]
@@ -6,6 +6,6 @@
 [node name="PipePair" type="Node2D"]
 script = ExtResource("1_qukmu")
 PipeScene = ExtResource("2_xe4sw")
-MidSpaceHeight = 31.665
-MidSpaceY = 58.855
-Width = 52.965
+MidSpaceHeight = 43.48
+MidSpaceY = 63.21
+Width = 45.12

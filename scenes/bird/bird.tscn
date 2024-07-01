@@ -3,8 +3,8 @@
 [ext_resource type="Script" path="res://scenes/bird/Bird.cs" id="1_m7s0x"]
 [ext_resource type="Texture2D" uid="uid://bpqmdduj10ckf" path="res://assets/Player/StyleBird1/Bird1-2.png" id="2_4d2ec"]
 [ext_resource type="Texture2D" uid="uid://or1i6x5ay176" path="res://assets/Player/StyleBird1/bird_dead.png" id="2_bdxyx"]
-[ext_resource type="AudioStream" uid="uid://cfk6rn0l8rxi7" path="res://scenes/bird/dead_sound.wav" id="4_st4mr"]
-[ext_resource type="AudioStream" uid="uid://dcxanycy7fauo" path="res://scenes/bird/fly_sound.wav" id="5_l51ng"]
+[ext_resource type="AudioStream" uid="uid://cfk6rn0l8rxi7" path="res://scenes/bird/dead_sound.wav" id="4_ck4ty"]
+[ext_resource type="AudioStream" uid="uid://dcxanycy7fauo" path="res://scenes/bird/fly_sound.wav" id="5_kou14"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rqd7w"]
 atlas = ExtResource("2_4d2ec")
@@ -50,28 +50,30 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_13ww1"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_up5to"]
 radius = 5.0
 
-[node name="Bird" type="CharacterBody2D" node_paths=PackedStringArray("_collisionShape", "_animatedSprite", "_flySound", "_deadSound")]
+[node name="Bird" type="CharacterBody2D" node_paths=PackedStringArray("_animatedSprite", "_flySound", "_deadSound", "_hitArea")]
 script = ExtResource("1_m7s0x")
 FlySpeed = -70.0
 Gravity = 2.0
-_collisionShape = NodePath("CollisionShape2D")
 _animatedSprite = NodePath("Sprite2D")
 _flySound = NodePath("FlySound")
 _deadSound = NodePath("DeadSound")
+_hitArea = NodePath("HitArea")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_48vng")
 animation = &"idle"
 autoplay = "idle"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_13ww1")
-
 [node name="DeadSound" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("4_st4mr")
+stream = ExtResource("4_ck4ty")
 
 [node name="FlySound" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("5_l51ng")
+stream = ExtResource("5_kou14")
+
+[node name="HitArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea"]
+shape = SubResource("CircleShape2D_up5to")

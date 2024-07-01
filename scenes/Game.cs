@@ -11,17 +11,41 @@ public partial class Game : Node2D
     [ExportGroup("ChildDontChange")] [Export]
     private Bird _bird;
 
+    [Export] private Timer _scoreTimer;
+    [Export] private UI _ui;
+
     #endregion
+
+    private int _score;
+
+    private int Score
+    {
+        get => _score;
+        set
+        {
+            if (_score == value) return;
+            _score = value;
+            _ui.UpdateScore(Score);
+        }
+    }
 
     public override void _Ready()
     {
         _bird.GameOver += OnGameOver;
         _bird.CollideWith += OnBirdCollisionWith;
+        _scoreTimer.Timeout += OnScoreTimerTimeout;
+
+        Score = 0;
     }
 
-    private void OnBirdCollisionWith(KinematicCollision2D collision)
+    private void OnScoreTimerTimeout()
     {
-        if (collision.GetCollider() is Pipe)
+        Score += 1;
+    }
+
+    private void OnBirdCollisionWith(Node2D body)
+    {
+        if (body is Pipe)
             _bird.Death();
     }
 

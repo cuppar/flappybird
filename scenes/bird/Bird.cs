@@ -7,7 +7,7 @@ public partial class Bird : CharacterBody2D
     #region Delegates
 
     [Signal]
-    public delegate void CollideWithEventHandler(KinematicCollision2D collision);
+    public delegate void CollideWithEventHandler(Node2D body);
 
     [Signal]
     public delegate void GameOverEventHandler();
@@ -25,6 +25,12 @@ public partial class Bird : CharacterBody2D
     public override void _Ready()
     {
         _screenSize = GetViewportRect().Size;
+        _hitArea.BodyEntered += OnBodyEntered;
+    }
+
+    private void OnBodyEntered(Node2D body)
+    {
+        EmitSignal(SignalName.CollideWith, body);
     }
 
     public override void _PhysicsProcess(double delta)
@@ -54,15 +60,14 @@ public partial class Bird : CharacterBody2D
                 _ => Rotation
             };
 
-        var collision = MoveAndCollide(Velocity * (float)delta);
-        if (collision != null)
-            EmitSignal(SignalName.CollideWith, collision);
+        MoveAndSlide();
     }
+
 
     public void Death()
     {
         Alive = false;
-        _collisionShape.Disabled = true;
+        _hitArea.SetDeferred(Area2D.PropertyName.Monitoring, false);
         _animatedSprite.Play("dead");
         _deadSound.Play();
 
@@ -83,11 +88,11 @@ public partial class Bird : CharacterBody2D
     #region Child
 
     [ExportGroup("ChildDontChange")] [Export]
-    private CollisionShape2D _collisionShape;
+    private AnimatedSprite2D _animatedSprite;
 
-    [Export] private AnimatedSprite2D _animatedSprite;
     [Export] private AudioStreamPlayer2D _flySound;
     [Export] private AudioStreamPlayer2D _deadSound;
+    [Export] private Area2D _hitArea;
 
     #endregion
 }
