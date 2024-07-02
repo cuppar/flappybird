@@ -13,7 +13,8 @@ config_version=5
 config/name="FlappyBird"
 run/main_scene="res://scenes/title_page/title_page.tscn"
 config/features=PackedStringArray("4.2", "C#", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="res://assets/Player/StyleBird1/bird_dead.png"
+config/windows_native_icon="res://icon.ico"
 
 [autoload]
 
@@ -52,3 +53,4 @@ fly={
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
+textures/vram_compression/import_etc2_astc=true
